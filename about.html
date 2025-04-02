@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Wasai Mjomba</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fdf2f8;
+            min-height: 100vh;
+            color: #4a4a4a;
+        }
+
+        /* Keep the same nav styles from index.html */
+        nav {
+            background-color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-links {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #db2777;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .about-container {
+            max-width: 1000px;
+            margin: 100px auto 40px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .profile-section {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #fff 0%, #fdf2f8 100%);
+            border: 1px solid rgba(219, 39, 119, 0.1);
+            animation: profilePulse 6s ease-in-out infinite;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(219, 39, 119, 0.1);
+            text-align: center;
+            height: fit-content;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 8px solid #fce7f3;
+            box-shadow: 0 5px 15px rgba(219, 39, 119, 0.2);
+            transition: transform 0.3s ease;
+            animation: gentlePulse 6s ease-in-out infinite;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-name {
+            font-family: 'Playfair Display', serif;
+            color: #831843;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .profile-title {
+            color: #db2777;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #fce7f3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #db2777;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            background-color: #db2777;
+            color: white;
+        }
+
+        .bio-section {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(219, 39, 119, 0.1);
+        }
+
+        .bio-section h2 {
+            font-family: 'Playfair Display', serif;
+            color: #831843;
+            margin-bottom: 25px;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .bio-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: #db2777;
+        }
+
+        .bio-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .bio-card {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #fff, #fdf2f8);
+            border: 1px solid rgba(219, 39, 119, 0.1);
+            animation: slideIn 0.5s ease-out backwards, shimmer 3s infinite;
+            padding: 20px;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .bio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(219, 39, 119, 0.05), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .bio-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .bio-card:nth-child(1) { animation-delay: 0.1s; }
+        .bio-card:nth-child(2) { animation-delay: 0.2s; }
+        .bio-card:nth-child(3) { animation-delay: 0.3s; }
+        .bio-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .bio-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .bio-card h3 {
+            color: #db2777;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .quote {
+            position: relative;
+            background: linear-gradient(135deg, #fdf2f8, #fff);
+            border: 1px solid rgba(219, 39, 119, 0.1);
+            animation: quoteFloat 6s ease-in-out infinite;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #831843;
+            text-align: center;
+            margin: 30px 0;
+            font-size: 1.2rem;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .quote::before, .quote::after {
+            content: '"';
+            font-size: 2.5rem;
+            color: rgba(219, 39, 119, 0.2);
+            position: absolute;
+        }
+
+        .quote::before {
+            top: 0;
+            left: 10px;
+        }
+
+        .quote::after {
+            bottom: -15px;
+            right: 10px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 1024px) {
+            .about-container {
+                gap: 30px;
+                padding: 15px;
+            }
+
+            .profile-img {
+                width: 180px;
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-container {
+                grid-template-columns: 1fr;
+                margin-top: 80px;
+            }
+
+            .profile-section {
+                padding: 20px;
+            }
+
+            .bio-section {
+                padding: 30px 20px;
+            }
+
+            .bio-section h2 {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+
+            .bio-section h2::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .quote {
+                font-size: 1.1rem;
+                margin: 20px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-container {
+                padding: 10px;
+                margin-top: 70px;
+            }
+
+            .profile-img {
+                width: 150px;
+                height: 150px;
+                border-width: 6px;
+            }
+
+            .profile-name {
+                font-size: 1.5rem;
+            }
+
+            .bio-card {
+                padding: 15px;
+            }
+
+            .bio-card h3 {
+                font-size: 1.1rem;
+            }
+
+            .quote {
+                font-size: 1rem;
+                padding: 15px;
+            }
+
+            .bio-section {
+                padding: 20px 15px;
+            }
+        }
+
+        /* Animation keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hamburger Menu Styles */
+        .nav-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hamburger {
+            display: none;
+            padding: 10px;
+            background: #fdf2f8;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            margin: 2px 0;
+            background-color: #db2777;
+            transition: all 0.3s ease;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Hamburger Animation Classes */
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Mobile Menu Styles */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                max-width: 300px;
+                background-color: white;
+                flex-direction: column;
+                padding: 80px 20px;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
+                padding: 10px 0;
+            }
+        }
+
+        /* Decorative elements */
+        .floating-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 1rem;
+            color: rgba(219, 39, 119, 0.2);
+            animation: floatingHeart 8s linear infinite;
+        }
+
+        .sparkle-element {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(219, 39, 119, 0.2);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        /* New Animations */
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @keyframes quoteFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(0.8); opacity: 0.3; }
+            50% { transform: scale(1); opacity: 0.8; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatingHeart {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            .profile-section,
+            .profile-img,
+            .bio-card,
+            .quote,
+            .heart,
+            .sparkle-element {
+                animation: none;
+            }
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #db2777, #9d174d);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            box-shadow: 0 5px 15px rgba(219, 39, 119, 0.2);
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(219, 39, 119, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="projects.html">Skills & Projects</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="overlay"></div>
+
+    <div class="about-container">
+        <div class="profile-section">
+            <img src="wasai.png" alt="Wasai Mjomba" class="profile-img">
+            <h1 class="profile-name">Wasai Mjomba</h1>
+            <p class="profile-title">IT Student | Digital Enthusiast</p>
+            <a href="index.html" class="back-button">Back to Home</a>
+            <div class="social-links">
+                <a href="#" title="LinkedIn">in</a>
+                <a href="#" title="GitHub">gh</a>
+                <a href="#" title="Twitter">tw</a>
+            </div>
+        </div>
+
+        <div class="bio-section">
+            <h2>My Story</h2>
+            <div class="bio-content">
+                <div class="bio-card">
+                    <h3>✨ The Beginning</h3>
+                    <p>Originally from Taita Taveta county, Kenya, I come from a loving family of five. My journey in technology began with a fascination for how digital innovations shape our world.</p>
+                </div>
+
+                <div class="bio-card">
+                    <h3>🎓 Academic Journey</h3>
+                    <p>Currently pursuing a diploma in Information Technology at KCA University, where I'm developing my skills and knowledge in various aspects of modern technology.</p>
+                </div>
+
+                <div class="quote">
+                    "Technology is best when it brings people together."
+                </div>
+
+                <div class="bio-card">
+                    <h3>🙏 Faith & Leadership</h3>
+                    <p>As a pastor's daughter and deputy leader of the prayer committee in KCA University Christian Union, I've witnessed how technology can enhance spiritual connections, enabling virtual morning devotions and worldwide sermon broadcasts.</p>
+                </div>
+
+                <div class="bio-card">
+                    <h3>💼 Entrepreneurial Spirit</h3>
+                    <p>While pursuing my studies, I run a successful online shoe business, marketing products nationwide. This venture has taught me valuable lessons about digital marketing and e-commerce, while allowing me to grow as an entrepreneur.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="floating-hearts">
+        <!-- These will be populated by JavaScript -->
+    </div>
+
+    <script>
+        // Mobile menu functionality
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const overlay = document.querySelector('.overlay');
+        const menuItems = document.querySelectorAll('.nav-links a');
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Close menu on window resize if open
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+
+        // Create floating hearts
+        function createFloatingElements() {
+            const heartsContainer = document.querySelector('.floating-hearts');
+            const heartSymbols = ['♥', '♡'];
+            
+            // Reduce number of hearts for mobile
+            const numberOfHearts = window.innerWidth < 768 ? 10 : 15;
+            
+            for (let i = 0; i < numberOfHearts; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.animationDelay = `${Math.random() * 8}s`;
+                heartsContainer.appendChild(heart);
+            }
+
+            // Reduce number of sparkles for mobile
+            const numberOfSparkles = window.innerWidth < 768 ? 8 : 12;
+            
+            for (let i = 0; i < numberOfSparkles; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle-element';
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.top = `${Math.random() * 100}%`;
+                sparkle.style.animationDelay = `${Math.random() * 2}s`;
+                heartsContainer.appendChild(sparkle);
+            }
+        }
+
+        // Call once when page loads
+        window.addEventListener('load', createFloatingElements);
+
+        // Clean up and recreate on orientation change
+        window.addEventListener('orientationchange', () => {
+            const heartsContainer = document.querySelector('.floating-hearts');
+            heartsContainer.innerHTML = '';
+            setTimeout(createFloatingElements, 100);
+        });
+    </script>
+</body>
+</html> 
